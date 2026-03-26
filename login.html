@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Paisabada | Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        :root {
+            --teal: #00b4b0;
+            --navy: #002b5b;
+            --bg1: #e3fffb;
+            --bg2: #f5fffe;
+            --radius: 18px;
+        }
+
+        body {
+            font-family: Poppins, Arial, sans-serif;
+            background: linear-gradient(135deg, var(--bg1), var(--bg2));
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            padding: 16px;
+        }
+
+        .card {
+            width: 95%;
+            max-width: 420px;
+            background: #fff;
+            padding: 40px 28px;
+            border-radius: var(--radius);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, .14);
+            text-align: center;
+            position: relative;
+        }
+
+        h2 {
+            color: var(--navy);
+            margin-bottom: 6px;
+            font-weight: 800;
+        }
+
+        .input-box {
+            position: relative;
+            margin: 18px 0;
+        }
+
+        .input-box input {
+            width: 80%;
+            padding: 14px 46px;
+            border-radius: 14px;
+            border: 1px solid #cbd5e1;
+            font-size: 16px;
+        }
+
+        button {
+            width: 100%;
+            background: var(--teal);
+            border: none;
+            color: #fff;
+            padding: 15px;
+            border-radius: 14px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 12px;
+        }
+
+        .error,
+        .success {
+            display: none;
+            font-size: 14px;
+            font-weight: 700;
+            margin-top: 12px;
+        }
+
+        .error {
+            color: #d9534f
+        }
+
+        .success {
+            color: #1da756
+        }
+
+        .signup-link {
+            margin-top: 16px;
+            display: inline-block;
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--teal);
+            text-decoration: none;
+        }
+
+
+        /* =========================
+   RESPONSIVE FIXES ONLY
+   ========================= */
+
+        @media (max-width: 768px) {
+            .card {
+                padding: 32px 22px;
+            }
+
+            h2 {
+                font-size: 24px;
+            }
+
+            .input-box input {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .card {
+                padding: 28px 18px;
+            }
+
+            h2 {
+                font-size: 22px;
+            }
+
+            .input-box input {
+                width: 100%;
+            }
+
+            button {
+                font-size: 16px;
+            }
+        }
+
+        @media (max-width: 360px) {
+            h2 {
+                font-size: 20px;
+            }
+
+            .signup-link {
+                font-size: 14px;
+            }
+        }
+
+        /* =========================
+   SAFE RESPONSIVE PATCH
+   ========================= */
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            width: 100%;
+            overflow-x: hidden;
+        }
+
+        /* Fix input width issue */
+        .input-box input {
+            width: 100%;
+            max-width: 100%;
+        }
+
+        /* Better touch on mobile */
+        button {
+            min-height: 48px;
+        }
+
+        /* Small phones (320px – 360px) */
+        @media (max-width:360px) {
+
+            body {
+                padding: 10px;
+            }
+
+            .card {
+                padding: 22px 14px;
+            }
+
+            h2 {
+                font-size: 19px;
+            }
+
+            p {
+                font-size: 12px;
+            }
+
+            .input-box {
+                margin: 14px 0;
+            }
+
+            .input-box input {
+                font-size: 13px;
+                padding: 12px 40px;
+            }
+
+            button {
+                font-size: 14px;
+                padding: 12px;
+            }
+
+            .signup-link {
+                font-size: 13px;
+            }
+        }
+
+        /* Landscape mobile fix */
+        @media (max-height:500px) {
+            body {
+                align-items: flex-start;
+                padding-top: 20px;
+            }
+        }
+
+        /* Large screens */
+        @media (min-width:1024px) {
+            .card {
+                max-width: 460px;
+            }
+        }
+
+
+
+        .forgot-link {
+            display: block;
+            margin-top: 12px;
+            font-size: 14px;
+            color: #00b4b0;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .forgot-link:hover {
+            text-decoration: underline;
+        }
+
+        /* TOP LEFT LOGO */
+        .logo {
+            width: 90px;
+            position: absolute;
+            top: 20px;
+            left: 20px;
+        }
+
+        /* HEADER TEXT */
+        .header-text {
+            text-align: center;
+            margin-top: 70px;
+        }
+
+        h2 {
+            color: var(--navy);
+            margin-bottom: 6px;
+            font-weight: 800;
+        }
+
+        .subtitle {
+            color: #67747e;
+            margin: 20px;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        /* FOOTER */
+        .copyright {
+            margin-top: -60px;
+            font-size: 15px;
+            color: #2b313a;
+            text-align: center;
+        }
+
+        /* MOBILE */
+        @media (max-width:480px) {
+
+            .logo {
+                width: 110px;
+                top: 5px;
+                left: 10px;
+            }
+
+            .header-text {
+                margin-top: 60px;
+            }
+
+            h2 {
+                font-size: 22px;
+            }
+
+        }
+
+        /* ================= INSURANCE PARTNERS ================= */
+
+        .insurance-partners {
+            padding: 70px 0;
+            background: #f8fafc;
+            overflow: hidden;
+            margin-top: -70px;
+        }
+
+        .partners-title {
+            text-align: center;
+            font-size: 34px;
+            font-weight: 700;
+            margin-bottom: 40px;
+            color: #0f172a;
+        }
+
+        .partners-title span {
+            color: #0EA496;
+        }
+
+        .partners-disclaimer {
+            max-width: 900px;
+            margin: 20px auto 5px;
+            font-size: 12px;
+            color: #6b7280;
+            line-height: 1.6;
+            text-align: center;
+        }
+
+        .partners-pos {
+            font-size: 12px;
+            color: #94a3b8;
+            text-align: center;
+        }
+
+        /* carousel wrapper */
+        .logo-carousel {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        /* track */
+        .logo-track {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+            width: max-content;
+        }
+
+        /* logos */
+        /* .logo-track img {
+            height: 64px;
+            width: auto;
+            filter: grayscale(100%);
+            opacity: 0.75;
+            transition: all .3s ease;
+        } */
+
+        /* uniform logo box */
+        .logo-track img {
+            height: 60px;
+            /* fixed visual height */
+            width: 140px;
+            /* fixed visual width */
+            object-fit: contain;
+            /* keep aspect ratio */
+            object-position: center;
+
+            filter: grayscale(100%);
+            opacity: 0.75;
+            transition: all .3s ease;
+        }
+
+        .logo-track img:hover {
+            filter: grayscale(0%);
+            opacity: 1;
+            transform: scale(1.08);
+        }
+
+        /* animations */
+        .logo-track.left {
+            animation: scrollLeft 28s linear infinite;
+        }
+
+        .logo-track.right {
+            animation: scrollRight 28s linear infinite;
+        }
+
+        @keyframes scrollLeft {
+            from {
+                transform: translateX(-50%);
+            }
+
+            to {
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes scrollRight {
+            from {
+                transform: translateX(0);
+            }
+
+            to {
+                transform: translateX(-50%);
+            }
+        }
+
+        /* mobile */
+        @media (max-width: 768px) {
+            .partners-title {
+                font-size: 17px;
+                padding: 0 20px;
+            }
+
+            .logo-track img {
+                height: 40px;
+                width: 80px;
+            }
+
+            .logo-track {
+                gap: 44px;
+                animation-duration: 35s;
+                /* align-items: center; */
+            }
+        }
+
+        /* ================= LUXURY LOGO CAROUSEL ================= */
+
+        .luxury-fade {
+            position: relative;
+        }
+
+        /* gradient fade edges */
+        .luxury-fade::before,
+        .luxury-fade::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            width: 120px;
+            height: 100%;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .luxury-fade::before {
+            left: 0;
+            background: linear-gradient(to right, #f8fafc 30%, transparent);
+        }
+
+        .luxury-fade::after {
+            right: 0;
+            background: linear-gradient(to left, #f8fafc 30%, transparent);
+        }
+
+        /* pause on hover (desktop) */
+        .logo-carousel:hover .logo-track {
+            animation-play-state: paused;
+        }
+
+        /* pause on touch (mobile) */
+        .logo-track:active {
+            animation-play-state: paused;
+        }
+
+        /* smoother animation */
+        .logo-track {
+            will-change: transform;
+        }
+
+        /* SVG optimization */
+        .logo-track img {
+            image-rendering: -webkit-optimize-contrast;
+            backface-visibility: hidden;
+        }
+
+        /* IRDAI note */
+        .irdai-note {
+            text-align: center;
+            margin-top: 28px;
+            font-size: 13px;
+            color: #64748b;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+        }
+
+        /* mobile fade fix */
+        @media (max-width: 768px) {
+
+            .luxury-fade::before,
+            .luxury-fade::after {
+                width: 60px;
+            }
+        }
+
+        
+    </style>
+</head>
+
+<body>
+
+    <div class="card">
+
+        <!-- <img src="img/paisabadalogo.jpeg" class="logo"> -->
+        <img src="logo-2-removebg-preview.png" class="logo">
+        <div class="header-text">
+            <h2>Welcome Back 👋</h2>
+            <p class="subtitle">Login to access your Wallet</p>
+        </div>
+        <div class="input-box">
+            <!-- <input id="email" placeholder="Email"> -->
+
+            <input id="identifier" placeholder="Enter Mobile Number">
+        </div>
+
+        <!-- <div class="input-box">
+      <input id="password" type="password" placeholder="Password">
+    </div> -->
+
+
+        <div class="input-box" id="loginOtpBox" style="display:none;">
+            <input id="loginOtp" placeholder="Enter OTP">
+        </div>
+
+        <!-- <button onclick="login()">Login</button> -->
+
+        <button onclick="login()" id="loginBtn">Send OTP</button>
+
+
+        <!--
+    <a href="forgot-password.html" class="forgot-link">
+      Forgot Password?
+    </a> -->
+        <!--
+    <a href="#" onclick="resendOtp()" class="forgot-link">
+      Resend OTP
+    </a> -->
+        <a href="#" onclick="resendOtp()" id="resendOtpLink" class="forgot-link" style="display:none;">
+            Resend OTP
+        </a>
+
+        <p id="otpTimer" style="font-size:13px;color:#666;margin-top:6px;"></p>
+
+        <div id="error" class="error"></div>
+        <div id="success" class="success">🎉 Login successful</div>
+
+        <a href="signup.html" class="signup-link">Become a Paisabada User</a>
+
+        <!-- ================= INSURANCE PARTNERS ================= -->
+        <section class="insurance-partners">
+            <h2 class="partners-title">
+                Our Insurance <span>Partners</span>
+            </h2>
+
+            <div class="logo-carousel luxury-fade">
+
+                <!-- ROW 1 (Left → Right) -->
+                <div class="logo-track left">
+                    <img src="logos/LIC-Logo.png" alt="LIC">
+                    <img src="logos/hdfc.jpg" alt="HDFC Life">
+                    <img src="logos/icici-pru-life.webp" alt="ICICI Prudential">
+                    <img src="logos/sbi-life.png" alt="SBI Life">
+                    <img src="logos/max-life.png" alt="Max Life">
+                    <img src="logos/tata-AIA.png" alt="Tata AIA">
+                    <img src="logos/kotak-life.png" alt="Kotak Life">
+                    <img src="logos/bajaj.png" alt="Bajaj Allianz Life">
+                    <img src="logos/go digit.png" alt="Go Digit Life Insurance Limited">
+                    <img src="logos/union.png" alt="Union Dai-Ichi Life Insurance Company Limited">
+                    <img src="logos/aditya-birla.jfif" alt="Aditya Birla SunLife Insurance Company Limited">
+                </div>
+
+                <!-- ROW 2 (Right → Left) -->
+                <div class="logo-track right">
+                    <img src="logos/Star_Health_and_Allied_Insurance.svg.png" alt="Star Health">
+                    <img src="logos/HDFC-Ergo-logo.png" alt="HDFC ERGO">
+                    <img src="logos/Icici-Lombard-Logo-Vector.svg-.png" alt="ICICI Lombard">
+                    <img src="logos/tata.png" alt="Tata AIG">
+                    <img src="logos/new-india-life.png" alt="New India Assurance">
+                    <img src="logos/niva.png" alt="Niva Bupa">
+                    <img src="logos/care-health.png" alt="Care Health">
+                    <img src="logos/met-life.png" alt="MetLife India Insurance Company Limited">
+                    <img src="logos/reliance-general.png" alt="Reliance General">
+                    <img src="logos/acko.png" alt="Acko Life Insurance Limited">
+                    <img src="logos/credit-life.png" alt="CreditAccess Life Insurance Limited">
+                </div>
+
+            </div>
+
+            <p class="partners-disclaimer">
+                Paisabada Financial Services acts as an authorised POS insurance facilitator. Insurance products are
+                underwritten and issued by respective IRDAI-licensed insurers. We do not underwrite or assume risk.
+                Policy
+                issuance, terms, and claim settlement are subject to the insurer’s guidelines.
+                Logos are property of respective insurance companies and used for identification purposes only.
+            </p>
+
+            <p class="partners-pos">
+                POS Code: (IP382943) | Operating under authorised insurance distribution framework.
+            </p>
+
+            <!-- IRDAI DISCLAIMER -->
+            <!-- <p class="irdai-note">
+            PaisaBada is a registered insurance web aggregator. Insurance products are offered by IRDAI-licensed
+            insurers.
+            IRDAI Registration No: <strong>XXXX</strong>.
+        </p> -->
+        </section>
+
+        <div class="copyright">
+            © 2026 Paisabada™ Financial Services.<br>
+            Powered by Wealtrix™ Fintech Pvt Ltd.
+        </div>
+
+        <script>
+            // function login() {
+
+            //   // const email = document.getElementById("email").value.trim();
+            //   const identifier = document.getElementById("identifier").value.trim();
+            //   const password = document.getElementById("password").value.trim();
+            //   const error = document.getElementById("error");
+            //   const success = document.getElementById("success");
+
+            //   error.style.display = "none";
+            //   success.style.display = "none";
+
+            //   if (!identifier || !password) {
+            //     error.textContent = "Email & password required";
+            //     error.style.display = "block";
+            //     return;
+            //   }
+
+            //   // 🔐 LOGIN API
+            //   fetch("http://localhost:8080/api/auth/login", {
+            //     method: "POST",
+            //     headers: { "Content-Type": "application/json" },
+            //     // body: JSON.stringify({ email, password })
+
+            //     body: JSON.stringify({ identifier, password })
+
+            //   })
+            //     .then(res => {
+            //       if (!res.ok) throw new Error("Invalid login");
+            //       return res.json();
+            //     })
+            //     .then(user => {
+
+            //       // ✅ SAVE LOGIN STATE
+            //       localStorage.setItem("pbLoggedIn", "true");
+            //       localStorage.setItem("pbUser", JSON.stringify(user));
+
+            //       // 🔥 IMPORTANT: FETCH WALLET AFTER LOGIN
+            //       fetch(`http://localhost:8080/api/wallet/${user.id}`)
+            //         .then(res => {
+            //           if (!res.ok) throw new Error("Wallet fetch failed");
+            //           return res.json();
+            //         })
+            //         .then(wallet => {
+
+            //           // ✅ MERGE WALLET DATA
+            //           user.coins = wallet.coins;
+            //           user.xp = wallet.xp || 0;
+
+            //           localStorage.setItem("pbUser", JSON.stringify(user));
+
+            //           success.style.display = "block";
+
+            //           // 👉 GO TO WALLET PAGE
+            //           setTimeout(() => {
+            //             window.location.href = "wallet.html";
+            //           }, 800);
+
+            //         })
+            //         .catch(err => {
+            //           console.error(err);
+            //           error.textContent = "Wallet loading failed";
+            //           error.style.display = "block";
+            //         });
+
+            //     })
+            //     .catch(() => {
+            //       error.textContent = "Invalid email or password";
+            //       error.style.display = "block";
+            //     });
+            // }
+
+
+
+
+
+
+            let loginOtpSent = false;
+            let timer = 30;
+            let timerInterval;
+
+            function isMobile(val) {
+                return /^[6-9]\d{9}$/.test(val);
+            }
+
+            function login() {
+
+                const mobile = document.getElementById("identifier").value.trim();
+                const otp = document.getElementById("loginOtp").value.trim();
+
+                const error = document.getElementById("error");
+                const success = document.getElementById("success");
+
+                error.style.display = "none";
+                success.style.display = "none";
+
+                if (!isMobile(mobile)) {
+                    error.textContent = "Enter valid mobile number";
+                    error.style.display = "block";
+                    return;
+                }
+
+                // STEP 1: Send OTP
+                if (!loginOtpSent) {
+
+                    fetch("https://paisabada.in/api/auth/send-otp", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ mobile })
+                    })
+                        .then(res => {
+                            if (!res.ok) throw new Error();
+
+                            document.getElementById("loginOtpBox").style.display = "block";
+                            document.getElementById("loginBtn").innerText = "Verify OTP";
+
+                            loginOtpSent = true;
+                            startOtpTimer();
+                        })
+                        .catch(() => {
+                            error.textContent = "Failed to send OTP";
+                            error.style.display = "block";
+                        });
+
+                }
+
+                // STEP 2: Verify OTP
+                else {
+
+                    if (!otp) {
+                        error.textContent = "Enter OTP";
+                        error.style.display = "block";
+                        return;
+                    }
+
+                    fetch("https://paisabada.in/api/auth/verify-otp", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ mobile, otp })
+                    })
+                        .then(res => {
+                            if (!res.ok) throw new Error();
+                            return res.json();
+                        })
+                        .then(user => {
+
+                            localStorage.setItem("pbLoggedIn", "true");
+                            localStorage.setItem("pbUser", JSON.stringify(user));
+
+                            return fetch(`https://paisabada.in/api/wallet/${user.id}`);
+                        })
+                        .then(res => res.json())
+                        .then(wallet => {
+
+                            const user = JSON.parse(localStorage.getItem("pbUser"));
+                            user.coins = wallet.coins;
+                            user.xp = wallet.xp || 0;
+
+                            localStorage.setItem("pbUser", JSON.stringify(user));
+
+                            success.style.display = "block";
+
+                            setTimeout(() => {
+                                window.location.href = "wallet.html";
+                            }, 800);
+
+                        })
+                        .catch(() => {
+                            error.textContent = "Invalid OTP";
+                            error.style.display = "block";
+                        });
+
+                }
+            }
+
+            function resendOtp() {
+
+                const mobile = document.getElementById("identifier").value.trim();
+
+                fetch("https://paisabada.in/api/auth/send-otp", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ mobile })
+                })
+                    .then(() => {
+                        alert("OTP Sent Again");
+                        startOtpTimer();
+                    })
+                    .catch(() => {
+                        alert("Failed to resend OTP");
+                    });
+
+            }
+
+
+
+            function startOtpTimer() {
+
+                const timerText = document.getElementById("otpTimer");
+                const resendLink = document.getElementById("resendOtpLink");
+
+                resendLink.style.display = "none";
+                timer = 30;
+
+                clearInterval(timerInterval);
+
+                timerInterval = setInterval(() => {
+
+                    timerText.innerText = "Resend OTP in " + timer + " sec";
+
+                    timer--;
+
+                    if (timer < 0) {
+
+                        clearInterval(timerInterval);
+                        timerText.innerText = "";
+                        resendLink.style.display = "block";
+
+                    }
+
+                }, 1000);
+
+            }
+        </script>
+
+</body>
+
+</html>
